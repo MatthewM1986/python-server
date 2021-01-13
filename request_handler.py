@@ -104,53 +104,35 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
-        # Initialize new animal
-        new_animal = None
+        # Initialize new item
+        new = None
 
         # Add a new animal to the list. Don't worry about
         # the orange squiggle, you'll define the create_animal
         # function next.
         if resource == "animals":
-            new_animal = create_animal(post_body)
-
-        # Encode the new location and send in response
-        self.wfile.write(f"{new_animal}".encode())
-
-        # Initialize new location
-        new_location = None
+            new = create_animal(post_body)
 
         # Add a new location to the list. Don't worry about
         # the orange squiggle, you'll define the create_location
         # function next.
         if resource == "locations":
-            new_location = create_location(post_body)
-
-        # Encode the new location and send in response
-        self.wfile.write(f"{new_location}".encode())
-
-        # Initialize new employee
-        new_employee = None
+            new = create_location(post_body)
 
         # Add a new employee to the list. Don't worry about
         # the orange squiggle, you'll define the create_employee
         # function next.
         if resource == "employees":
-            new_employee = create_employee(post_body)
-
-        # Encode the new employee and send in response
-        self.wfile.write(f"{new_employee}".encode())
-
-        # Initialize new customer
-        new_customer = None
+            new = create_employee(post_body)
 
         # Add a new customer to the list. Don't worry about
         # the orange squiggle, you'll define the create_customer
         # function next.
         if resource == "customers":
-            new_customer = create_customer(post_body)
+            new = create_customer(post_body)
 
-        # Encode the new customer and send in response
-        self.wfile.write(f"{new_customer}".encode())
+        # Encode the new item and send in response
+        self.wfile.write(f"{new}".encode())
 
     def do_DELETE(self):
         # Set a 204 response code
