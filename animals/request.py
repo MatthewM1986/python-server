@@ -1,3 +1,6 @@
+## new_animal = Animal(1, "Snickers", "Dog", "Recreation", 1, 4)
+
+
 ANIMALS = [
     {
         "id": 1,

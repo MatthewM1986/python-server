@@ -104,35 +104,27 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
-        # Initialize new item
-        new = None
+        # Initialize new resource
+        new_resource = None
 
         # Add a new animal to the list. Don't worry about
-        # the orange squiggle, you'll define the create_animal
-        # function next.
         if resource == "animals":
-            new = create_animal(post_body)
+            new_resource = create_animal(post_body)
 
         # Add a new location to the list. Don't worry about
-        # the orange squiggle, you'll define the create_location
-        # function next.
-        if resource == "locations":
-            new = create_location(post_body)
+        elif resource == "locations":
+            new_resource = create_location(post_body)
 
         # Add a new employee to the list. Don't worry about
-        # the orange squiggle, you'll define the create_employee
-        # function next.
-        if resource == "employees":
-            new = create_employee(post_body)
+        elif resource == "employees":
+            new_resource = create_employee(post_body)
 
         # Add a new customer to the list. Don't worry about
-        # the orange squiggle, you'll define the create_customer
-        # function next.
-        if resource == "customers":
-            new = create_customer(post_body)
+        elif resource == "customers":
+            new_resource = create_customer(post_body)
 
-        # Encode the new item and send in response
-        self.wfile.write(f"{new}".encode())
+        # Encode the new resource and send in response
+        self.wfile.write(f"{new_resource}".encode())
 
     def do_DELETE(self):
         # Set a 204 response code
@@ -146,15 +138,15 @@ class HandleRequests(BaseHTTPRequestHandler):
             delete_animal(id)
 
         # Delete a single location from the list
-        if resource == "locations":
+        elif resource == "locations":
             delete_location(id)
 
         # Delete a single employee from the list
-        if resource == "employees":
+        elif resource == "employees":
             delete_employee(id)
 
         # Delete a single customer from the list
-        if resource == "customers":
+        elif resource == "customers":
             delete_customer(id)
 
         # Encode the new info and send in response
@@ -177,15 +169,15 @@ class HandleRequests(BaseHTTPRequestHandler):
             update_animal(id, post_body)
 
         # Delete a single location from the list
-        if resource == "locations":
+        elif resource == "locations":
             update_location(id, post_body)
 
         # Delete a single employee from the list
-        if resource == "employees":
+        elif resource == "employees":
             update_employee(id, post_body)
 
         # Delete a single customer from the list
-        if resource == "customers":
+        elif resource == "customers":
             update_customer(id, post_body)
 
         # Encode the new info and send in response
