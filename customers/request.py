@@ -60,17 +60,20 @@ def get_single_customer(id):
             c.email,
             c.password
         FROM customer c
-        WHERE c.id = ?
-        """, (id, ))
+        WHERE c.email = ?
+        """, (email, ))
 
         # Load the single result into memory
-        data = db_cursor.fetchone()
+        customers = []
+        dataset = db_cursor.fetchall()
 
         # Create an customer instance from the current row
+        for row in dataset:
         customer = Customer(data['id'], data['name'], data['address'],
                             data['email'], data['password'])
+        customers.append(customer.__dict__)
 
-        return json.dumps(customer.__dict__)
+    return json.dumps(customers)
 
 
 def create_customer(customer):
