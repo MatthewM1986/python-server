@@ -73,15 +73,6 @@ INSERT INTO `Animal`
 VALUES (null, "Doodles", "Kennel", "Poodle", 3, 1);
 INSERT INTO `Animal`
 VALUES (null, "Daps", "Kennel", "Boxer", 2, 2);
--- Get only the animal rows where the `id` field value is 3
--- SELECT a.id,
---     a.name,
---     a.breed,
---     a.status,
---     a.location_id,
---     a.customer_id
--- FROM animal a
--- WHERE a.id = 2;
 CREATE TABLE `Employee` (
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `name` TEXT NOT NULL,
