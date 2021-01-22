@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Animal
+from models import Animal, Location, Customer
 
 
 def get_all_animals():
@@ -19,8 +19,20 @@ def get_all_animals():
             a.breed,
             a.status,
             a.location_id,
-            a.customer_id
+            a.customer_id,
+            l.id loc_id,
+            l.name loc_name,
+            l.address loc_address,
+            c.id cust_id,
+            c.name cust_name,
+            c.address cust_address,
+            c.email cust_email,
+            c.password cust_password
         FROM animal a
+        JOIN location l
+            ON l.id = a.location_id
+        JOIN customer c
+            ON c.id = a.customer_id
         """)
 
         # Initialize an empty list to hold all animal representations
@@ -40,6 +52,22 @@ def get_all_animals():
                             row['status'], row['location_id'],
                             row['customer_id'])
 
+            # Create a Location instance from the current row
+            location = Location(
+                row['loc_id'], row['loc_name'], row['loc_address'])
+
+            # Add the dictionary representation of the location to the animal
+            animal.location = location.__dict__
+
+            # Create a Customer instance from the current row
+            customer = Customer(
+                row['cust_id'], row['cust_name'], row['cust_address'],
+                row['cust_email'], row['cust_password'])
+
+            # Add the dictionary representation of the customer to the animal
+            animal.customer = customer.__dict__
+
+            # Add the dictionary representation of the animal to the list
             animals.append(animal.__dict__)
 
     # Use `json` package to properly serialize list as JSON
